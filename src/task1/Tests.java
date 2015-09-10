@@ -41,10 +41,19 @@ public class Tests {
         System.out.println("Test OK");
     }
 
+    /**
+     * @param min
+     * @param max
+     * @return рандомный int в области [ min, max ].
+     */
     private static int getRandomInt(int min, int max){
         return min + (int)(Math.random() * ((max - min) + 1));
     }
 
+    /**
+     * @param str
+     * @return true, если в строке нет повторяющихся символов; иначе - false.
+     */
     private static boolean checkOnRepeats(String str){
         char[] charArray = str.toCharArray();
         for (int i = 0; i < charArray.length; i++)
@@ -52,6 +61,12 @@ public class Tests {
         return true;
     }
 
+    /**
+     * @param str
+     * @param index
+     * @return true, если символ стоящий на позиции index в строке str встречается в этой строке только один раз.
+     * Иначе - false.
+     */
     private static boolean checkLonely(String str, int index){
         char[] charArray = str.toCharArray();
         char charForCheck = charArray[index];
@@ -60,6 +75,12 @@ public class Tests {
         return true;
     }
 
+    /**
+     * @param str
+     * @param index
+     * @return true, если в строке str символы от 0 до index встречаются более одного раза.
+     * Иначе - false;
+     */
     private static boolean checkPreviousChars(String str, int index){
         char[] charArray = str.toCharArray();
         for (int i = 0; i < index; i++)
