@@ -36,7 +36,11 @@ public class Sorter implements StudentsSorter {
                 }
             }
         }
+        if (!group.isEmpty() && !student.isEmpty()){
+            groups.add(new String(group),new String(student));
+        }
 
+        groups.sort();
         groups.print();
 
     }
@@ -61,7 +65,13 @@ public class Sorter implements StudentsSorter {
         }
 
         void sort(){
-            
+            for(int i = 0; i < groups.size() - 1; i++)
+                for(int j = 0; j < groups.size() - i - 1; j++)
+                    if(groups.get(j).size() < groups.get(j + 1).size()){
+                        Group temp = groups.get(j);
+                        groups.set(j, groups.get(j + 1));
+                        groups.set(j + 1, temp);
+                    }
         }
 
         void print(){
@@ -87,6 +97,10 @@ public class Sorter implements StudentsSorter {
 
         String name(){
             return name;
+        }
+
+        int size(){
+            return students.size();
         }
 
         void print(){
