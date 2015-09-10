@@ -20,6 +20,11 @@ public class Start {
 
     }
 
+    /**
+     * @param inputPath путь к входному файлу.
+     * @param outputFileName название выходного файла.
+     * @return путь к выходному файлу.
+     */
     private static String createOutputPath(String inputPath, String outputFileName){
         String[] tempArray = inputPath.split("/");
         String result = "";
