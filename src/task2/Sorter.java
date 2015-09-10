@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by vlad on 10.09.15.
@@ -72,6 +73,9 @@ public class Sorter implements StudentsSorter {
                         groups.set(j, groups.get(j + 1));
                         groups.set(j + 1, temp);
                     }
+
+            for (Group g : groups)
+                g.sortByName();
         }
 
         void print(){
@@ -101,6 +105,10 @@ public class Sorter implements StudentsSorter {
 
         int size(){
             return students.size();
+        }
+
+        void sortByName(){
+            Collections.sort(students, String.CASE_INSENSITIVE_ORDER);
         }
 
         void print(){
