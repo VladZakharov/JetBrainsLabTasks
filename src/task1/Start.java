@@ -20,7 +20,7 @@ public class Start {
      * @param data произвольная строка
      * @return индекс первого не повторяющегося символа в ней, -1, если все символы в строке повторяются, -2, если строка null.
      */
-    private static int process(String data){
+    static int process(String data){
         if (data == null) return -2;
         char[] array = data.toCharArray();
 
