@@ -1,5 +1,6 @@
 package task2;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -11,11 +12,11 @@ import java.util.Collections;
  */
 public class Sorter implements StudentsSorter {
     @Override
-    public void process(InputStream inputstream, OutputStream output) throws IOException {
+    public void process(InputStream inputStream, OutputStream outputStream) throws IOException {
 //        System.out.println(inputstream.available());
-        byte[] bytes = new byte[inputstream.available()];
-        int data = inputstream.read(bytes);
-        inputstream.close();
+        byte[] bytes = new byte[inputStream.available()];
+        int data = inputStream.read(bytes);
+        inputStream.close();
 //        System.out.println(new String(bytes));
         char[] charArray = new String(bytes).toCharArray();
 
@@ -42,7 +43,14 @@ public class Sorter implements StudentsSorter {
         }
 
         groups.sort();
-        groups.print();
+//        groups.print();
+
+
+        // передаем полученную строку st и приводим её к byte массиву.
+        outputStream.write(groups.toBytes());
+        // закрываем поток вывода
+        // только после того как мы закроем поток данные попадут в файл.
+        outputStream.close();
 
     }
 
@@ -83,6 +91,13 @@ public class Sorter implements StudentsSorter {
                 g.print();
         }
 
+        byte[] toBytes(){
+            String result = "";
+            for (Group g : groups)
+                result += g.asString();
+            return result.getBytes();
+        }
+
     }
 
     class Group {
@@ -115,7 +130,16 @@ public class Sorter implements StudentsSorter {
             System.out.print(name+": ");
             for (int i = 0; i < students.size()-1; i++)
                 System.out.print(students.get(i)+", ");
-            System.out.println(students.get(students.size()-1));
+            System.out.println(students.get(students.size() - 1));
+        }
+
+        String asString(){
+            String result = "";
+            result += (name+": ");
+            for (int i = 0; i < students.size()-1; i++)
+                result += (students.get(i)+", ");
+            result += (students.get(students.size() - 1)+'\n');
+            return result;
         }
 
     }
