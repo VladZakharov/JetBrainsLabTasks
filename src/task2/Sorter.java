@@ -11,6 +11,11 @@ import java.util.Collections;
  * Created by vlad on 10.09.15.
  */
 public class Sorter implements StudentsSorter {
+    /**
+     * @param inputStream входной поток данных.
+     * @param outputStream выходной поток данных.
+     * @throws IOException
+     */
     @Override
     public void process(InputStream inputStream, OutputStream outputStream) throws IOException {
         byte[] bytes = new byte[inputStream.available()];
@@ -48,6 +53,9 @@ public class Sorter implements StudentsSorter {
 
     }
 
+    /**
+     * класс, хранящий список групп
+     */
     class Groups {
 
         private ArrayList<Group> groups = null;
@@ -56,6 +64,12 @@ public class Sorter implements StudentsSorter {
             groups = new ArrayList<>();
         }
 
+        /**
+         * Если группа с данным названием уже существует, то добавляет студента в эту группу.
+         * Иначе - создает новую группу и добавляет студента в нее.
+         * @param groupName название группы
+         * @param studentName имя студента
+         */
         void add(String groupName, String studentName){
             for (Group g : groups)
                 if (g.name().equals(groupName)) {
@@ -67,6 +81,9 @@ public class Sorter implements StudentsSorter {
             groups.get(groups.size()-1).add(studentName);
         }
 
+        /**
+         * Сортирует группы в порядке убывания кол-ва студентов.
+         */
         void sort(){
             for(int i = 0; i < groups.size() - 1; i++)
                 for(int j = 0; j < groups.size() - i - 1; j++)
@@ -85,6 +102,9 @@ public class Sorter implements StudentsSorter {
                 g.print();
         }
 
+        /**
+         * @return список групп в запрашиваемой в задаче форме в виде массива байтов.
+         */
         byte[] toBytes(){
             String result = "";
             for (Group g : groups)
@@ -94,6 +114,9 @@ public class Sorter implements StudentsSorter {
 
     }
 
+    /**
+     * класс, хранящий название группы и список студентов
+     */
     class Group {
 
         private String name = null;
@@ -116,6 +139,9 @@ public class Sorter implements StudentsSorter {
             return students.size();
         }
 
+        /**
+         * сортирует имена студентов по имени в порядке возрастания.
+         */
         void sortByName(){
             Collections.sort(students, String.CASE_INSENSITIVE_ORDER);
         }
@@ -127,6 +153,9 @@ public class Sorter implements StudentsSorter {
             System.out.println(students.get(students.size() - 1));
         }
 
+        /**
+         * @return строку в формате "название_группы: список_студентов_через_запятую"
+         */
         String asString(){
             String result = "";
             result += (name+": ");
