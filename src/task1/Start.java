@@ -6,11 +6,12 @@ package task1;
 public class Start {
 
     public static void main(String[] args){
-        if (args != null){
-            System.out.println("Input string: " + args[0]);
-            System.out.println( process(args[0]) );
+        if (args.length > 0 && args[0] != null){
+            System.out.println("Your string: " + args[0]);
+            System.out.println("Program execution result: " + process(args[0]));
+        } else {
+            System.out.println("Restart program with input string as argument");
         }
-//        else
     }
 
     private static int process(String data){

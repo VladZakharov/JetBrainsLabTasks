@@ -13,11 +13,9 @@ import java.util.Collections;
 public class Sorter implements StudentsSorter {
     @Override
     public void process(InputStream inputStream, OutputStream outputStream) throws IOException {
-//        System.out.println(inputstream.available());
         byte[] bytes = new byte[inputStream.available()];
-        int data = inputStream.read(bytes);
+        inputStream.read(bytes);
         inputStream.close();
-//        System.out.println(new String(bytes));
         char[] charArray = new String(bytes).toCharArray();
 
         Groups groups = new Groups();
@@ -45,11 +43,7 @@ public class Sorter implements StudentsSorter {
         groups.sort();
 //        groups.print();
 
-
-        // передаем полученную строку st и приводим её к byte массиву.
         outputStream.write(groups.toBytes());
-        // закрываем поток вывода
-        // только после того как мы закроем поток данные попадут в файл.
         outputStream.close();
 
     }

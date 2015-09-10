@@ -8,11 +8,12 @@ import java.io.*;
 public class Start {
 
     public static void main(String[] args) throws IOException {
-        if (args[0] != null){
+        if (args.length > 0 && args[0] != null){
             String outputPath = createOutputPath(args[0],"out.txt");
             OutputStream outputStream = new FileOutputStream(outputPath);
             Sorter studentsSorter = new Sorter();
             studentsSorter.process(new FileInputStream(args[0]), outputStream);
+            System.out.println("Program execution result was written to " + outputPath);
         } else {
             System.out.println("Restart program with path to file as argument");
         }
